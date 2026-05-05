@@ -1,6 +1,6 @@
 # Assignment 2: Neural Network Spike Counter
 # Student Name: Daniel Pereira
-# Date: May 4, 2026
+# Date: May 5, 2026
 
 import random
 
@@ -11,9 +11,11 @@ print()
 
 # ── Parameters ──────────────────────────────────────────────
 num_neurons = 10
-num_steps   = 100     # Assume each time step is 1 ms
+num_steps   = 100
 threshold   = -55.0   # Spike threshold (mV)
 V_reset     = -70.0   # Reset voltage after spike (mV)
+duration    = 1000.0  # Assuming Total simulation duration is 1 s (1000 ms)
+
 
 # ── Initialize neurons ───────────────────────────────────────
 # All neurons start at resting potential with zero spikes recorded
@@ -84,8 +86,50 @@ id_max = spike_counts.index(max(spike_counts))
 id_min = spike_counts.index(min(spike_counts))
 print(f"Most active neuron: #{id_max} ({spike_counts[id_max]} spikes)")
 print(f"Least active neuron: #{id_min} ({spike_counts[id_min]} spikes)")
-# If each time step is 1 ms
-print(f"Network firing rate: {total_spikes/num_steps* 1000} Hz")
+avg_spike_step_ms = total_spikes / duration
+net_firing_rate = 1000/avg_spike_step_ms
+print(f"Network firing rate: {net_firing_rate:.2f} Hz")
+print(f"Average neuron firing rate: {net_firing_rate/num_neurons:.2f} Hz")
 
 print()
 print("=" * 60)
+
+"""
+# Assignment_2 Daniel Pereira
+
+A short document showing outputs of `assignment_2_danielpereira.py`.
+
+============================================================
+  NEURAL NETWORK SPIKE COUNTER
+============================================================
+
+Simulating 10 neurons for 100 time steps...
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡  Simulation complete!
+
+============================================================
+  SIMULATION RESULTS
+============================================================
+
+Spike Counts per Neuron:
+Neuron 0: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (13 spikes)
+Neuron 1: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (16 spikes)
+Neuron 2: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (15 spikes)
+Neuron 3: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (14 spikes)
+Neuron 4: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (14 spikes)
+Neuron 5: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (14 spikes)
+Neuron 6: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (15 spikes)
+Neuron 7: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (15 spikes)
+Neuron 8: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (15 spikes)
+Neuron 9: ⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡ (13 spikes)
+
+Statistics:
+------------------------------------------------------------
+Total spikes: 144
+Average spikes per neuron: 14.4
+Most active neuron: #1 (16 spikes)
+Least active neuron: #0 (13 spikes)
+Network firing rate: 6944.44 Hz
+Average neuron firing rate: 694.44 Hz
+
+============================================================
+"""
