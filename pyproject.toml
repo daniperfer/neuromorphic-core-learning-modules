@@ -25,9 +25,6 @@ dependencies = [
     "pydantic-settings",
     "pyyaml",
     "wheel",
-    "torch",
-    "torchvision",
-    "torch-inspect",
 ]
 
 # Specify other group dependencies
