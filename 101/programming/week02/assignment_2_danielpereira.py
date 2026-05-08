@@ -11,20 +11,20 @@ print()
 
 # ── Parameters ──────────────────────────────────────────────
 num_neurons = 10
-num_steps   = 100
-threshold   = -55.0   # Spike threshold (mV)
-V_reset     = -70.0   # Reset voltage after spike (mV)
-duration    = 1000.0  # Assuming Total simulation duration is 1 s (1000 ms)
+num_steps = 100
+threshold = -55.0  # Spike threshold (mV)
+V_reset = -70.0  # Reset voltage after spike (mV)
+duration = 1000.0  # Assuming Total simulation duration is 1 s (1000 ms)
 
 
 # ── Initialize neurons ───────────────────────────────────────
 # All neurons start at resting potential with zero spikes recorded
-voltages     = []
+voltages = []
 spike_counts = []
 
 for i in range(num_neurons):
-    voltages.append(-70.0)   # Resting potential (mV)
-    spike_counts.append(0)   # No spikes yet
+    voltages.append(-70.0)  # Resting potential (mV)
+    spike_counts.append(0)  # No spikes yet
 
 print(f"Simulating {num_neurons} neurons for {num_steps} time steps...")
 
@@ -34,7 +34,6 @@ print(f"Simulating {num_neurons} neurons for {num_steps} time steps...")
 
 for step in range(num_steps):
     for neuron in range(num_neurons):
-
         # 2: Add random input to this neuron's voltage
         # Each neuron gets a different random input each step
         # Hint: random.uniform(0, 5) generates a random float between 0 and 5
@@ -81,15 +80,15 @@ print("Statistics:")
 print("-" * 60)
 # Print your statistics here
 print(f"Total spikes: {total_spikes}")
-print(f"Average spikes per neuron: {1. * total_spikes/num_neurons}")
+print(f"Average spikes per neuron: {1. * total_spikes / num_neurons}")
 id_max = spike_counts.index(max(spike_counts))
 id_min = spike_counts.index(min(spike_counts))
 print(f"Most active neuron: #{id_max} ({spike_counts[id_max]} spikes)")
 print(f"Least active neuron: #{id_min} ({spike_counts[id_min]} spikes)")
 avg_spike_step_ms = total_spikes / duration
-net_firing_rate = 1000/avg_spike_step_ms
+net_firing_rate = 1000 / avg_spike_step_ms
 print(f"Network firing rate: {net_firing_rate:.2f} Hz")
-print(f"Average neuron firing rate: {net_firing_rate/num_neurons:.2f} Hz")
+print(f"Average neuron firing rate: {net_firing_rate / num_neurons:.2f} Hz")
 
 print()
 print("=" * 60)
@@ -104,7 +103,9 @@ A short document showing outputs of `assignment_2_danielpereira.py`.
 ============================================================
 
 Simulating 10 neurons for 100 time steps...
-⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡  Simulation complete!
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡
+⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡⚡  Simulation complete!
 
 ============================================================
   SIMULATION RESULTS

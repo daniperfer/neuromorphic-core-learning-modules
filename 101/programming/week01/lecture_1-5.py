@@ -1,21 +1,24 @@
 """
-Exercise 1: Write a program that asks the user for a neuron’s spike count and recording duration in seconds, 
-then calculates and displays the firing rate in Hz and the average inter-spike interval in milliseconds.
+Exercise 1: Write a program that asks the user for a neuron's spike count and
+recording duration in seconds,
+then calculates and displays the firing rate in Hz and
+the average inter-spike interval in milliseconds.
 """
 
 """
-Exercise 2: Extend Exercise 1 to also ask for the neuron’s type and brain region. 
-Display a formatted report that includes all inputs and all calculated values. 
+Exercise 2: Extend Exercise 1 to also ask for the neuron's type and brain region.
+Display a formatted report that includes all inputs and all calculated values.
 Use f-strings with appropriate decimal formatting throughout.
 """
 
 """
-Exercise 3: Add a try/except block to Exercise 1 so that if the user types something that isn’t a number, 
-the program prints a helpful message and exits gracefully instead of crashing. 
+Exercise 3: Add a try/except block to Exercise 1 so that if the user types
+something that isn't a number,
+the program prints a helpful message and exits gracefully instead of crashing.
 Test it by typing "hello" when prompted for the spike count.
 """
 
- # DEFAULTS
+# DEFAULTS
 spike_count_default = 10
 duration_s_def = 0.1
 
@@ -31,7 +34,7 @@ while True:
     if spike_count <= 0:
         print("Invalid range. The input number must be greater than 0, like 10 or 40")
         continue
-    break   # Input was valid — exit the loop
+    break  # Input was valid — exit the loop
 print(f"Spike count set to {spike_count}")
 
 while True:
@@ -44,7 +47,7 @@ while True:
     if duration_s <= 0:
         print("Invalid range. The input number must be greater than 0")
         continue
-    break   # Input was valid — exit the loop
+    break  # Input was valid — exit the loop
 print(f"Interval duration set to {duration_s}")
 
 firing_rate_hz = spike_count / duration_s

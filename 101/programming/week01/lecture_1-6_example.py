@@ -18,35 +18,35 @@ print()
 
 # ── Classify voltage state ──────────────────────────────────
 if voltage >= -55:
-  voltage_state = "firing threshold reached"
+    voltage_state = "firing threshold reached"
 elif voltage >= -60:
-  voltage_state = "near- threshold (highly excitable)"
+    voltage_state = "near- threshold (highly excitable)"
 elif voltage >= -70:
-  voltage_state = "mildly depolarized"
+    voltage_state = "mildly depolarized"
 elif voltage >= -80:
-  voltage_state = "resting / slightly hyperpolarized"
+    voltage_state = "resting / slightly hyperpolarized"
 else:
-  voltage_state = "strongly hyperpolarized"
+    voltage_state = "strongly hyperpolarized"
 
 # ── Classify activity level ─────────────────────────────────
 if spike_count == 0:
-  activity = "silent"
+    activity = "silent"
 elif spike_count <= 3:
-  activity = "low activity"
+    activity = "low activity"
 elif spike_count <= 10:
-  activity = "moderate activity"
+    activity = "moderate activity"
 elif spike_count <= 25:
-  activity = "high activity"
+    activity = "high activity"
 else:
-  activity = "bursting"
+    activity = "bursting"
 
 # ── Determine output type ────────────────────────────────────
 if neuron_type == "Interneuron":
-  output_type = "inhibitory"
+    output_type = "inhibitory"
 elif neuron_type in ("Pyramidal", "Purkinje"):
-  output_type = "excitatory"
+    output_type = "excitatory"
 else:
-  output_type = "unknown"
+    output_type = "unknown"
 
 # ── Can the neuron fire right now? ──────────────────────────
 can_fire = (voltage >= -55) and (not refractory)
@@ -63,18 +63,18 @@ print(f" Refractory: {'Yes — cannot fire' if refractory else 'No'}")
 print()
 
 if can_fire:
-  print(" ⚡ STATUS: FIRING")
-  print(" Action potential conditions met.")
-elif voltage >= -55 and refractory: 
-  print(" ⏳ STATUS: THRESHOLD REACHED BUT REFRACTORY")
-  print(" Neuron will fire again once refractory period ends.")
+    print(" ⚡ STATUS: FIRING")
+    print(" Action potential conditions met.")
+elif voltage >= -55 and refractory:
+    print(" ⏳ STATUS: THRESHOLD REACHED BUT REFRACTORY")
+    print(" Neuron will fire again once refractory period ends.")
 elif voltage >= -60:
-  print(" ⚠️ STATUS: NEAR THRESHOLD")
-  print(" Small additional input could trigger a spike.")
+    print(" ⚠️ STATUS: NEAR THRESHOLD")
+    print(" Small additional input could trigger a spike.")
 else:
-  needed = -55 - voltage
-  print(f" 💤 STATUS: SUBTHRESHOLD")
-  print(f" Needs {needed:.1f} mV more depolarization to fire.")
+    needed = -55 - voltage
+    print(" 💤 STATUS: SUBTHRESHOLD")
+    print(f" Needs {needed:.1f} mV more depolarization to fire.")
 
 print()
 print("=" * 55)
