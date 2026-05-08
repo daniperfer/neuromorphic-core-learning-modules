@@ -11,8 +11,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    container:
-      image: python:3.11-slim
     steps:
       - name: Install basic dependencies
         run: |
