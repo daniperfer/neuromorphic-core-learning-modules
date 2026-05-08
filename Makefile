@@ -16,5 +16,4 @@ build:  ## build standalone package
 	uv build
 
 lint:  ## linting all files
-	uv run pre-commit install
 	uv run pre-commit run --all-files
