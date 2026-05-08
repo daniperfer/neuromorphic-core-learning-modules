@@ -7,7 +7,7 @@ install: ## install package in "editable" mode
 	uv sync
 	@echo "Activate env with: $(GREEN_COLOR)source .venv/bin/activate$(RESET_COLOR)"
 
-install-dev: install ## install package in "editable" mode
+install-dev:  ## install package in "editable" mode with dev dependencies
 	uv sync --dev
 	uv run pre-commit install
 	@echo "Activate env with: $(GREEN_COLOR)source .venv/bin/activate$(RESET_COLOR)"
