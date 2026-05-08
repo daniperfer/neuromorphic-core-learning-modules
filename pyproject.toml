@@ -28,6 +28,12 @@ dependencies = [
     "torch",
     "torchvision",
     "torch-inspect",
+]
+
+# Specify other group dependencies
+[dependency-groups]
+test = ["pytest >=7.0", "pytest-cov >=3.0"]
+dev = [
     "black",
     "flake8-pyproject",
     "mypy",
@@ -37,9 +43,6 @@ dependencies = [
     "safety",
     "twine",
 ]
-
-[tool.pixi.package.build]
-backend = { name = "pixi-build-python", version = "0.1.*" }
 
 [tool.pytest]
 log_cli = true
