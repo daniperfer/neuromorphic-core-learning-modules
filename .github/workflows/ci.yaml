@@ -14,6 +14,11 @@ jobs:
     container:
       image: python:3.11-slim
     steps:
+      - name: Install basic dependencies
+        run: |
+          apt-get update
+          apt-get install -y git curl make
+
       - name: "Checkout the repository"
         uses: actions/checkout@v4
 
