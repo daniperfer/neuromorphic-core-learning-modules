@@ -31,9 +31,8 @@ jobs:
 
       - name: Install module and dependencies
         run: |
-          make install-dev
+          make install
 
       - name: Lint
         run: |
-          uv run pre-commit install
           make lint
