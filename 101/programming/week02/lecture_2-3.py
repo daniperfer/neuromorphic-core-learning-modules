@@ -1,9 +1,9 @@
 # Simplified neuron integration simulation
-voltage = -70.0       # Starting at resting potential (mV)
-threshold = -55.0     # Action potential threshold (mV)
-time = 0              # Current time (ms)
-dt = 1.0              # Time step size (ms)
-I_input = 2.0         # Constant input current (nanoamps)
+voltage = -70.0  # Starting at resting potential (mV)
+threshold = -55.0  # Action potential threshold (mV)
+time = 0.0  # Current time (ms)
+dt = 1.0  # Time step size (ms)
+I_input = 2.0  # Constant input current (nanoamps)
 
 print("Starting simulation...")
 

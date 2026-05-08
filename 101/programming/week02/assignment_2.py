@@ -2,7 +2,7 @@
 # Student Name: [YOUR NAME]
 # Date: [DATE]
 
-import random
+# import random
 
 print("=" * 60)
 print("  NEURAL NETWORK SPIKE COUNTER")
@@ -11,18 +11,18 @@ print()
 
 # ── Parameters ──────────────────────────────────────────────
 num_neurons = 10
-num_steps   = 100
-threshold   = -55.0   # Spike threshold (mV)
-V_reset     = -70.0   # Reset voltage after spike (mV)
+num_steps = 100
+threshold = -55.0  # Spike threshold (mV)
+V_reset = -70.0  # Reset voltage after spike (mV)
 
 # ── Initialize neurons ───────────────────────────────────────
 # All neurons start at resting potential with zero spikes recorded
-voltages     = []
+voltages = []
 spike_counts = []
 
 for i in range(num_neurons):
-    voltages.append(-70.0)   # Resting potential (mV)
-    spike_counts.append(0)   # No spikes yet
+    voltages.append(-70.0)  # Resting potential (mV)
+    spike_counts.append(0)  # No spikes yet
 
 print(f"Simulating {num_neurons} neurons for {num_steps} time steps...")
 
@@ -32,19 +32,16 @@ print(f"Simulating {num_neurons} neurons for {num_steps} time steps...")
 
 for step in range(num_steps):
     for neuron in range(num_neurons):
-
         # TODO 2: Add random input to this neuron's voltage
         # Each neuron gets a different random input each step
         # Hint: random.uniform(0, 5) generates a random float between 0 and 5
         # Add it directly to voltages[neuron]
-
 
         # TODO 3: Check whether this neuron has reached threshold
         # If voltages[neuron] >= threshold:
         #   - Add 1 to spike_counts[neuron]
         #   - Reset voltages[neuron] to V_reset
         #   - Print a ⚡ character (use print("⚡", end="", flush=True) — no newline)
-
 
         pass  # Remove this line once you've added your code
 

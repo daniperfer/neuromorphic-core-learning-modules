@@ -9,7 +9,7 @@ It calculates how a neuron's membrane potential changes when current
 is injected, and determines whether the neuron fires an action potential.
 """
 
-import math
+# import math
 
 # ============================================================
 # SECTION 1: WELCOME SCREEN
@@ -69,9 +69,9 @@ threshold = -55.0  # mV — the voltage at which an action potential fires
 did_spike = True if v_new >= threshold else False
 
 # How much more voltage is needed to reach threshold (only if no spike)?
-voltage_needed = 0
+voltage_needed = 0.0
 if not did_spike:
-    voltage_needed = threshold - v_new    
+    voltage_needed = threshold - v_new
 
 # ============================================================
 # SECTION 4: DISPLAY RESULTS
@@ -164,10 +164,6 @@ print(f"  Firing rate {firing_rate:.2f} Hz")
 if r_membrane == 0:
     print("r_membrane is zero! Setting delta_v to zero.")
     delta_v = 0
-
-
-
-
 
 
 """

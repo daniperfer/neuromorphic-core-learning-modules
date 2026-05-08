@@ -7,7 +7,7 @@ Analyzes five neurons from a 60-second recording session
 and produces a formatted lab report.
 """
 
-import math
+# import math
 
 # ── Constants ────────────────────────────────────────────────
 # These values don't change during the program.
@@ -15,55 +15,56 @@ import math
 # (a) they're easy to find and change later
 # (b) the rest of the code is self-documenting
 
-THRESHOLD       = -55.0    # mV — action potential threshold
-RESTING         = -70.0    # mV — typical resting potential
-RECORDING_TIME  = 60       # seconds
-SEPARATOR       = "=" * 60
-SUBSEPARATOR    = "-" * 60
+THRESHOLD = -55.0  # mV — action potential threshold
+RESTING = -70.0  # mV — typical resting potential
+RECORDING_TIME = 60  # seconds
+SEPARATOR = "=" * 60
+SUBSEPARATOR = "-" * 60
 
 # ── Neuron Data ──────────────────────────────────────────────
 # In a real program this would come from a data file.
 # For now we define it directly. Each block is one neuron.
 
 # Neuron 1
-n1_id         = 1
-n1_type       = "Pyramidal"
-n1_region     = "Prefrontal Cortex"
-n1_voltage    = -52.3    # mV
-n1_spikes     = 187      # spikes in 60 seconds
+n1_id = 1
+n1_type = "Pyramidal"
+n1_region = "Prefrontal Cortex"
+n1_voltage = -52.3  # mV
+n1_spikes = 187  # spikes in 60 seconds
 n1_refractory = False
 
 # Neuron 2
-n2_id         = 2
-n2_type       = "Interneuron"
-n2_region     = "Prefrontal Cortex"
-n2_voltage    = -61.8
-n2_spikes     = 412
+n2_id = 2
+n2_type = "Interneuron"
+n2_region = "Prefrontal Cortex"
+n2_voltage = -61.8
+n2_spikes = 412
 n2_refractory = False
 
 # Neuron 3
-n3_id         = 3
-n3_type       = "Pyramidal"
-n3_region     = "Hippocampus"
-n3_voltage    = -70.1
-n3_spikes     = 23
+n3_id = 3
+n3_type = "Pyramidal"
+n3_region = "Hippocampus"
+n3_voltage = -70.1
+n3_spikes = 23
 n3_refractory = False
 
 # Neuron 4
-n4_id         = 4
-n4_type       = "Purkinje"
-n4_region     = "Cerebellum"
-n4_voltage    = -67.4
-n4_spikes     = 0
+n4_id = 4
+n4_type = "Purkinje"
+n4_region = "Cerebellum"
+n4_voltage = -67.4
+n4_spikes = 0
 n4_refractory = True
 
 # Neuron 5
-n5_id         = 5
-n5_type       = "Interneuron"
-n5_region     = "Hippocampus"
-n5_voltage    = -83.2
-n5_spikes     = 61
+n5_id = 5
+n5_type = "Interneuron"
+n5_region = "Hippocampus"
+n5_voltage = -83.2
+n5_spikes = 61
 n5_refractory = False
+
 
 def classify_activity(spikes, duration):
     """
@@ -98,16 +99,16 @@ def voltage_state(voltage):
     else:
         return "Hyperpolarized"
 
+
 def print_neuron_report(nid, ntype, region, voltage, spikes, refractory):
     """Prints a formatted analysis report for one neuron."""
-
     # ── Calculations ─────────────────────────────────────────
     firing_rate = spikes / RECORDING_TIME
-    isi_ms      = (1000 / firing_rate) if firing_rate > 0 else float('inf')
+    isi_ms = (1000 / firing_rate) if firing_rate > 0 else float("inf")
     to_threshold = THRESHOLD - voltage
-    activity    = classify_activity(spikes, RECORDING_TIME)
-    v_state     = voltage_state(voltage)
-    can_fire    = (voltage >= THRESHOLD) and (not refractory)
+    activity = classify_activity(spikes, RECORDING_TIME)
+    v_state = voltage_state(voltage)
+    can_fire = (voltage >= THRESHOLD) and (not refractory)
 
     # Output type based on neuron type
     if ntype == "Interneuron":
@@ -132,7 +133,7 @@ def print_neuron_report(nid, ntype, region, voltage, spikes, refractory):
     if firing_rate > 0:
         print(f"  Avg ISI:          {isi_ms:.1f} ms")
     else:
-        print(f"  Avg ISI:          N/A (silent)")
+        print("  Avg ISI:          N/A (silent)")
 
     print(f"  Activity level:   {activity}")
     print(f"  Output type:      {output}")
@@ -140,16 +141,16 @@ def print_neuron_report(nid, ntype, region, voltage, spikes, refractory):
 
     # Status
     if can_fire:
-        print(f"  ⚡ STATUS: FIRING — action potential conditions met")
+        print("  ⚡ STATUS: FIRING — action potential conditions met")
     elif refractory and voltage >= THRESHOLD:
-        print(f"  ⏳ STATUS: REFRACTORY — will fire when period ends")
+        print("  ⏳ STATUS: REFRACTORY — will fire when period ends")
     elif voltage >= -60:
         print(f"  ⚠️  STATUS: NEAR THRESHOLD — {to_threshold:+.1f} mV to fire")
     else:
         print(f"  💤 STATUS: SUBTHRESHOLD — {to_threshold:+.1f} mV to threshold")
 
     print()
-    return firing_rate   # Return rate so we can use it in the summary
+    return firing_rate  # Return rate so we can use it in the summary
 
 
 # ── Header ───────────────────────────────────────────────────
@@ -160,8 +161,8 @@ print(SEPARATOR)
 print()
 print(f"  Recording duration:  {RECORDING_TIME} seconds")
 print(f"  Spike threshold:     {THRESHOLD} mV")
-print(f"  Neurons analyzed:    5")
-print(f"  Regions covered:     Prefrontal Cortex, Hippocampus, Cerebellum")
+print("  Neurons analyzed:    5")
+print("  Regions covered:     Prefrontal Cortex, Hippocampus, Cerebellum")
 print()
 
 # ── Neuron Reports ───────────────────────────────────────────
@@ -177,10 +178,10 @@ rate4 = print_neuron_report(n4_id, n4_type, n4_region, n4_voltage, n4_spikes, n4
 rate5 = print_neuron_report(n5_id, n5_type, n5_region, n5_voltage, n5_spikes, n5_refractory)
 
 # ── Summary Statistics ───────────────────────────────────────
-total_spikes  = n1_spikes + n2_spikes + n3_spikes + n4_spikes + n5_spikes
-avg_rate      = (rate1 + rate2 + rate3 + rate4 + rate5) / 5
-silent_count  = sum([1 for s in [n1_spikes, n2_spikes, n3_spikes, n4_spikes, n5_spikes] if s == 0])
-active_count  = 5 - silent_count
+total_spikes = n1_spikes + n2_spikes + n3_spikes + n4_spikes + n5_spikes
+avg_rate = (rate1 + rate2 + rate3 + rate4 + rate5) / 5
+silent_count = sum([1 for s in [n1_spikes, n2_spikes, n3_spikes, n4_spikes, n5_spikes] if s == 0])
+active_count = 5 - silent_count
 
 most_active_rate = max(rate1, rate2, rate3, rate4, rate5)
 

@@ -9,7 +9,7 @@ It calculates how a neuron's membrane potential changes when current
 is injected, and determines whether the neuron fires an action potential.
 """
 
-import math
+# import math
 
 # ============================================================
 # SECTION 1: WELCOME SCREEN
@@ -33,22 +33,22 @@ print("-" * 60)
 
 # Get a neuron ID number from the user (whole number — use int)
 # Example: neuron_id = int(input("Enter Neuron ID: "))
-neuron_id = # YOUR CODE HERE
+neuron_id = 0  # YOUR CODE HERE
 
 # Get the neuron type as text — no conversion needed, stays a string
-neuron_type = # YOUR CODE HERE
+neuron_type = "Type"  # YOUR CODE HERE
 
 # Get the starting membrane voltage in mV (decimal — use float)
-v_initial = # YOUR CODE HERE
+v_initial = 0.0  # YOUR CODE HERE
 
 # Get the injected current in nanoamps (decimal — use float)
-i_current = # YOUR CODE HERE
+i_current = 0.0  # YOUR CODE HERE
 
 # Get the membrane resistance in megaohms (decimal — use float)
-r_membrane = # YOUR CODE HERE
+r_membrane = 0.0  # YOUR CODE HERE
 
 # Get the duration of one time step in milliseconds (decimal — use float)
-time_step = # YOUR CODE HERE
+time_step = 0  # YOUR CODE HERE
 
 print()
 
@@ -57,20 +57,20 @@ print()
 # ============================================================
 
 # Calculate voltage change: ΔV = I × R
-delta_v = # YOUR CODE HERE
+delta_v = 0.0  # YOUR CODE HERE
 
 # Calculate new membrane potential: V_new = V_initial + ΔV
-v_new = # YOUR CODE HERE
+v_new = 0.0  # YOUR CODE HERE
 
 # Define the spike threshold (this one is done for you)
 threshold = -55.0  # mV — the voltage at which an action potential fires
 
 # Did the neuron spike? Create a boolean: True if v_new >= threshold
-did_spike = # YOUR CODE HERE
+did_spike = False  # YOUR CODE HERE
 
 # How much more voltage is needed to reach threshold (only if no spike)?
 if not did_spike:
-    voltage_needed = # YOUR CODE HERE
+    voltage_needed = 0  # YOUR CODE HERE
 else:
     voltage_needed = 0
 
@@ -96,9 +96,9 @@ print()
 
 print("CALCULATED RESULTS:")
 # Display voltage change formatted to 2 decimal places
-print(f"  Voltage change (ΔV):     # YOUR CODE HERE mV")
+print(f"  Voltage change (ΔV):     {None} # YOUR CODE HERE mV")
 # Display new voltage formatted to 2 decimal places
-print(f"  New membrane potential:  # YOUR CODE HERE mV")
+print(f"  New membrane potential:  {None} # YOUR CODE HERE mV")
 print(f"  Spike threshold:         {threshold} mV")
 print()
 

@@ -1,0 +1,107 @@
+[project]
+name = "neur"
+dynamic = ["version"]
+description = "AIE model for further photonic simulation."
+authors = [
+    { name = "Gradiant Video Analytics", email = "videoanalytics.support@gradiant.org" },
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: Other/Proprietary License",
+    "Operating System :: OS Independent",
+    "Private :: Do Not Upload",
+]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "build",
+    "fire",
+    "jsonschema",
+    "loguru",
+    "matplotlib",
+    "numpy",
+    "pip",
+    "pydantic",
+    "pydantic-settings",
+    "pyyaml",
+    "wheel",
+]
+
+# Specify other group dependencies
+[dependency-groups]
+test = ["pytest >=7.0", "pytest-cov >=3.0"]
+dev = [
+    "black",
+    "flake8-pyproject",
+    "mypy",
+    "pre-commit",
+    "pytest",
+    "pytest-cov",
+    "safety",
+    "twine",
+]
+
+[tool.pytest]
+log_cli = true
+log_level = "DEBUG"
+
+[tool.black]
+line-length = 100
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[tool.isort]
+profile = "black"
+
+[tool.flake8]
+max-line-length = 100
+max-complexity = 18
+docstring-convention = "google"
+ignore = [
+    # Exclude errors conflicting with black
+    "W503",
+    "E203",
+    # Exclude some unnecesarry errors
+    "D104",
+    "D105",
+    "D212",
+    "D200",
+    "D107",
+    "D100",
+    "D205",
+    "D415",
+    "E231",
+    "E241",
+    # D100, D101, D102, D103, D104, D105, D106, D107, D200, D205, D212, D415, D417
+]
+exclude = [
+    # No need to traverse our git directory
+    ".git",
+    # There's no value in checking cache directories
+    "__pycache__",
+    ".mpy_cache",
+    ".pytest_cache",
+]
+per-file-ignores = ["tests/*: D1"]
+
+[tool.mypy]
+strict = false
+disallow_untyped_calls = false
+disallow_untyped_decorators = false
+
+[[tool.mypy.overrides]]
+module = ["fire", "pydantic", "pydantic_core", "yaml"]
+ignore_missing_imports = true
