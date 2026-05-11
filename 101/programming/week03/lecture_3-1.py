@@ -55,7 +55,7 @@ def classify_neuron(firing_rate):
     """
     Classify a neuron's activity based on its firing rate.
 
-    Args:
+    Params:
         firing_rate: spikes per second average rate (float)
 
     Returns a string label: 'silent', 'low', 'moderate', or 'high'.
