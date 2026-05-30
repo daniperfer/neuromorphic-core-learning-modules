@@ -1,3 +1,7 @@
+"""
+Lecture 2.3: While Loops — Repeating Until Something Changes
+"""
+
 # Simplified neuron integration simulation
 voltage = -70.0  # Starting at resting potential (mV)
 threshold = -55.0  # Action potential threshold (mV)

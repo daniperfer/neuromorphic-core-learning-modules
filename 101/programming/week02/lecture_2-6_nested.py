@@ -1,3 +1,7 @@
+"""
+Lecture 2.6: Nested Loops — Grids, Matrices, and Neural Networks
+"""
+
 rows = 3
 cols = 3
 

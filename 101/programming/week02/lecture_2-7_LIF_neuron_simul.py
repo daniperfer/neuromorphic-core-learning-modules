@@ -1,3 +1,7 @@
+"""
+Lecture 2.7: Putting It All Together — The Leaky Integrate-and-Fire Neuron
+"""
+
 print("=== LIF Neuron Simulator ===\n")
 
 # Biological parameters
