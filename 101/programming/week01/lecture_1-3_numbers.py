@@ -1,3 +1,7 @@
+"""
+Lecture 1.3: Numbers and Mathematical Operations
+"""
+
 # Problem 1: A neuron fires 80 spikes in 4 seconds.
 # Calculate its firing rate in Hz and its average inter-spike interval in milliseconds.
 

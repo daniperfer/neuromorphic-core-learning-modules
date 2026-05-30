@@ -1,4 +1,8 @@
 """
+Lecture 1.4: Strings and Text
+"""
+
+"""
 Exercise 1: You receive a neuron label from a data file: " INTERNEURON_TYPE_2 ".
 Write code that cleans it to read "Interneuron Type 2" — stripped of spaces,
 with underscores replaced by spaces, and properly capitalized.

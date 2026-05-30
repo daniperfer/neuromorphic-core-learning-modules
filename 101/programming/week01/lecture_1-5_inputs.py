@@ -1,4 +1,8 @@
 """
+Lecture 1.5: Getting Input from Users
+"""
+
+"""
 Exercise 1: Write a program that asks the user for a neuron's spike count and
 recording duration in seconds,
 then calculates and displays the firing rate in Hz and
