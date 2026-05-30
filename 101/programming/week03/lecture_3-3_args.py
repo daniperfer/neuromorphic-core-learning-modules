@@ -1,3 +1,8 @@
+"""
+Lecture 3.3: Positional, Keyword, and Default Arguments — Calling Functions Clearly
+"""
+
+
 def describe_neuron(neuron_id, neuron_type, voltage):
     """Describe a neuron's current state."""
     print(f"Neuron {neuron_id} ({neuron_type}): {voltage} mV")

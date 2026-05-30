@@ -1,3 +1,8 @@
+"""
+Lecture 3.1: Defining and Using Functions — Writing Code You Can Reuse
+"""
+
+
 def calculate_firing_rate_v1(spikes, duration):
     """Calculate firing rate in Hz given spike count and duration in seconds."""
     rate = spikes / duration
