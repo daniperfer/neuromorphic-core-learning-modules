@@ -1,3 +1,8 @@
+"""
+Lecture 3.2: Parameters, Arguments, and Return Values — Making Functions Flexible
+"""
+
+
 def calculate_voltage_change(current, resistance, dt):
     """
     Current, resistance, dt are: PARAMETERS
