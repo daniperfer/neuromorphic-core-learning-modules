@@ -1,4 +1,8 @@
 """
+Lecture 1.6: Booleans and Conditional Logic
+"""
+
+"""
 Neural State Classifier
 Determines the functional state of a neuron based on membrane voltage, firing
 history, and neuron type.

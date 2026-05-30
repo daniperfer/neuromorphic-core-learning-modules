@@ -1,4 +1,8 @@
 """
+Lecture 1.7: Putting It All Together
+"""
+
+"""
 Week 1 Capstone: Multi-Neuron Analysis Report
 Demonstrates: variables, data types, math, strings,
               f-strings, input, booleans, conditionals

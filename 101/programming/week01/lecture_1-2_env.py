@@ -1,3 +1,7 @@
+"""
+Lecture 1.2: Setting Up Your Programming Environment
+"""
+
 # Neuron Firing Rate Calculator
 
 print("=" * 50)

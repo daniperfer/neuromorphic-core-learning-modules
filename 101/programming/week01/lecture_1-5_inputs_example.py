@@ -1,4 +1,8 @@
 """
+Lecture 1.5: Getting Input from Users
+"""
+
+"""
 Interactive Neuron Voltage Simulator
 Collects user input and computes membrane potential dynamics
 """

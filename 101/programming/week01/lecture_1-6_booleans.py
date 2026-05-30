@@ -1,4 +1,8 @@
 """
+Lecture 1.6: Booleans and Conditional Logic
+"""
+
+"""
 Exercise 1: Write a program that asks for a neuron's membrane voltage and
 prints one of four messages:
 “Hyperpolarized” (below -80 mV),
