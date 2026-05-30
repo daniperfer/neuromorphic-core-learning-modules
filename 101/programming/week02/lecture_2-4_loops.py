@@ -1,3 +1,7 @@
+"""
+Lecture 2.4: For Loops — Processing Data Step by Step
+"""
+
 num_neurons = 5
 
 print("Initializing neural network...")

@@ -1,3 +1,7 @@
+"""
+Lecture 2.1: Conditional Statements — If, Elif, Else
+"""
+
 # Neuron state classifier
 # Membrane voltages are in millivolts (mV)
 
