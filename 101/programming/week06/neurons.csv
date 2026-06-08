@@ -1,0 +1,4 @@
+neuron_id,type,voltage,spike_count,region
+N001,pyramidal,-70.0,15,cortex
+N002,interneuron,-72.0,42,hippocampus
+N003,pyramidal,-68.0,8,cortex
