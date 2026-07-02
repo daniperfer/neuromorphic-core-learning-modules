@@ -1,6 +1,6 @@
 # Assignment 7: Neural Population Analysis
 # Student Name: Daniel Pereira
-# Date: [DATE]
+# Date: July 2, 2026
 
 import numpy as np
 
