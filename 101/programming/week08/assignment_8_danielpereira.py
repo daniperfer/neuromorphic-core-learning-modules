@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # ── Experiment parameters ──────────────────────────────────────────────────────
-# np.random.seed(42)
+np.random.seed(42)
 N_NEURONS = 5
 N_TRIALS = 5
 DURATION = 1000  # ms
@@ -169,28 +169,24 @@ ax_isi.set_title(f"ISI neuron {most_active_neuron}")
 # Display with ax_corr.imshow(), colormap 'RdBu_r', vmin=-1, vmax=1.
 # Add a colorbar. Label axes.
 
-# TODO: Your correlation heatmap code here
+# Your correlation heatmap code here
 bin_size_ms = 50
 bins = np.arange(0, DURATION + bin_size_ms, bin_size_ms)
 neuron_matrix_count = []
 for neuron in range(N_NEURONS):
-    trial_spikes = []
+    all_trials_spikes = []
     for trial in range(N_TRIALS):
         # hist
         counts, edges = np.histogram(all_spikes[neuron][trial], bins=bins)
-        trial_spikes.append(counts)
+        all_trials_spikes.append(counts)
     # avg across trials
-    per_trial = np.array(trial_spikes)
-    neuron_means = np.mean(per_trial, axis=1)
+    per_neuron = np.array(all_trials_spikes)
+    neuron_means = np.mean(per_neuron, axis=1)
     # stack on neuron
-    print(f"neuron_means shape {neuron_means.shape}")
     neuron_matrix_count.append(neuron_means)
 
 matrix_count = np.array(neuron_matrix_count)
-print(f"matrix_count shape {matrix_count.shape}")
 correlation = np.corrcoef(neuron_matrix_count)
-print(f"correlation shape {correlation.shape}")
-
 
 im = ax_corr.imshow(correlation, cmap="RdBu_r", vmin=-1, vmax=1)
 ax_corr.set_xlabel("Neuron #")
@@ -204,9 +200,58 @@ ax_corr.set_title("Pairwise Neuron Correlations")
 #   sem_rate  = std of per-trial rates / sqrt(N_TRIALS)
 # Plot as a bar chart with error bars (capsize=5).
 # Color bars by neuron index using the same colormap you used in the raster.
-# Add a horizontal dashed line at the population mean rate.
 
-# TODO: Your bar chart code here
+# Your bar chart code here
+neuron_mean_rates = []
+neuron_sem_rates = []
+total_spike_count = 0
+for neuron in range(N_NEURONS):
+    trial_mean_rates = []
+    trial_stds = []
+    neuron_spike_count = 0
+    for trial in range(N_TRIALS):
+        trial_rate = np.mean(all_spikes[neuron][trial])
+        trial_std = np.std(all_spikes[neuron][trial])
+        trial_mean_rates.append(trial_rate)
+        trial_stds.append(trial_std)
+        neuron_spike_count += len(all_spikes[neuron][trial])
+    mean_rate = neuron_spike_count / (N_TRIALS * DURATION / 1000)
+    sem_rate = np.std(trial_mean_rates) / np.sqrt(N_TRIALS)
+    neuron_mean_rates.append(mean_rate)
+    neuron_sem_rates.append(sem_rate)
+    total_spike_count += neuron_spike_count
+    # print(f"mean of rate stds = {np.mean(trial_stds)}")
+    # print(f"std of mean rates = {np.std(trial_mean_rates)}")
+
+x = np.arange(N_NEURONS)
+bars = ax_bar.bar(
+    x,
+    neuron_mean_rates,
+    yerr=neuron_sem_rates,
+    capsize=5,
+    color=[colors[id] for id in x],
+    edgecolor="black",
+    linewidth=0.8,
+    alpha=0.85,
+)
+
+# Annotate each bar with its exact value
+for bar, rate in zip(bars, neuron_mean_rates):
+    ax_bar.text(
+        bar.get_x() + bar.get_width(),
+        bar.get_height() - 0.1,
+        f"{rate}",
+        ha="right",
+        va="top",
+        fontsize=10,
+    )
+
+# Add a horizontal dashed line at the population mean rate.
+population_mean = np.mean(neuron_mean_rates)
+ax_bar.axhline(
+    population_mean, color="red", linestyle="--", label=f"Pop. mean: {population_mean:.2f} Hz"
+)
+ax_bar.legend(fontsize=9)
 
 ax_bar.set_xlabel("Neuron #")
 ax_bar.set_ylabel("Mean Firing Rate (Hz)")
@@ -225,8 +270,44 @@ ax_bar.set_title("Mean Firing Rate per Neuron (± SEM)")
 #
 # Format as a monospace text block inside a rounded bbox (facecolor='lightyellow').
 
-# TODO: Your statistics panel code here
+# --- Panel: Formatted statistics text box ---
 
+max_id = np.argmax(neuron_mean_rates)
+min_id = np.argmin(neuron_mean_rates)
+off_diagonal_corr_lower = correlation[np.tril_indices(correlation.shape[0], k=-1)]
+
+pre_stim_count = 0
+post_stim_count = 0
+DURATION_PRE = 300
+DURATION_POST = 200
+for neuron in range(N_NEURONS):
+    for trial in range(N_TRIALS):
+        trial_spikes = all_spikes[neuron][trial]
+        pre_stim_count += len(trial_spikes[trial_spikes < 300])
+        post_stim_count += len(trial_spikes[(trial_spikes >= 300) & (trial_spikes < 500)])
+pre_mean_rate = pre_stim_count / (N_TRIALS * DURATION_PRE / 1000)
+post_mean_rate = post_stim_count / (N_TRIALS * DURATION_POST / 1000)
+
+stats_text = (
+    f"STATISTICS PANEL \n"
+    f"{'─' * 28}\n"
+    f"Total Spikes:     {total_spike_count}\n"
+    f"Mean firing rate: {population_mean:.2f} Hz\n"
+    f"Most active:      [{max_id}] {neuron_mean_rates[max_id]:.2f} Hz\n"
+    f"Least active:     [{min_id}] {neuron_mean_rates[min_id]:.2f} Hz\n"
+    f"Mean pwise corr:  {np.mean(off_diagonal_corr_lower):.4f}\n"
+    f"Stim resp ratio:  {post_mean_rate / pre_mean_rate:.2f}"
+)
+ax_stats.text(
+    0.05,
+    0.95,
+    stats_text,
+    transform=ax_stats.transAxes,
+    fontsize=11,
+    verticalalignment="top",
+    fontfamily="monospace",
+    bbox=dict(boxstyle="round", facecolor="lightyellow", alpha=0.5),
+)
 
 # ── Save and show ─────────────────────────────────────────────────────────────
 filename = "figure_8-8_assignment8_dashboard.png"
