@@ -29,14 +29,14 @@ all_spikes = []  # all_spikes[neuron_idx][trial_idx] = spike time array
 
 for neuron in range(N_NEURONS):
     neuron_spikes = []
-    response_rate = np.random.uniform(5, 25)
+    response_rate = np.random.uniform(5, 25)  # ms
 
     for trial in range(N_TRIALS):
         # Generate background spikes (hint: ~5 background spikes per trial)
         background = np.random.uniform(0, DURATION, 5)  # 5 background spikes
 
         # Generate response spikes in 300–500 ms window
-        response = np.random.exponential(1.0 / response_rate, 50)
+        response = np.random.exponential(response_rate, 60)  # (1000/response_rate) Hz
         spike_times = np.cumsum(response)
         spike_times = spike_times[
             (spike_times > 300) & (spike_times < 500)
@@ -47,7 +47,6 @@ for neuron in range(N_NEURONS):
         neuron_spikes.append(spikes)
 
     all_spikes.append(neuron_spikes)
-
 
 # ── PART 2: Set up the figure ─────────────────────────────────────────────────
 plt.rcParams.update(
@@ -111,7 +110,7 @@ ax_raster.legend()
 # Your PSTH code here
 bin_size_ms = 20
 bins = np.arange(0, DURATION + bin_size_ms, bin_size_ms)
-spike_trains = np.concatenate(all_spikes)
+spike_trains = np.concatenate([trial_data for neuron in all_spikes for trial_data in neuron])
 counts, edges = np.histogram(spike_trains, bins=bins)
 
 # Convert to firing rate: spikes per trial per second
