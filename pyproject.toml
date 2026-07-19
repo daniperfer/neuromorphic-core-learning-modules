@@ -26,6 +26,8 @@ dependencies = [
     "pyyaml",
     "wheel",
     "scikit-learn",
+    "pandas",
+    "tensorflow",
 ]
 
 # Specify other group dependencies
