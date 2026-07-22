@@ -25,6 +25,9 @@ dependencies = [
     "pydantic-settings",
     "pyyaml",
     "wheel",
+    "scikit-learn",
+    "pandas",
+    "tensorflow",
 ]
 
 # Specify other group dependencies
