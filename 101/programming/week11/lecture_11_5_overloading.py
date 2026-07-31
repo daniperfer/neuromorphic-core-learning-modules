@@ -83,73 +83,6 @@ class LFPPipeline(NeuralPipeline):
         return self._lowcut <= frequency_hz <= self._highcut
 
 
-print("\nrepr and str:")
-pipeline = LFPPipeline(sampling_rate=1000)
-pipeline.load_data("week11_simulated_lfp.npy")
-pipeline.run()
-
-print("repr(pipeline)")
-print(repr(pipeline))
-# "LFPPipeline(modality='LFP', fs=1000, duration=2.0s)"
-print("print(pipeline)")
-print(pipeline)
-# [LFPPipeline] modality=LFP, fs=1000 Hz, 2000 samples (2.00s), status=processed
-print("str(pipeline)")
-print(str(pipeline))
-# "[LFPPipeline] modality=LFP, ..."
-
-# --------------------------------------
-# len and bool: Sizing and Truth Testing
-print("\nlen and bool:")
-pipeline2 = LFPPipeline()
-bool(pipeline2)  # False — no data yet
-print(len(pipeline2))  # 0
-# Natural use in conditionals
-if pipeline2:
-    pipeline2.run()
-else:
-    print("Load data before running.")
-
-bool(pipeline)  # True — data loaded
-print(len(pipeline))  # 2000
-# Natural use in conditionals
-if pipeline:
-    pipeline.run()
-else:
-    print("Load data before running.")
-print()
-
-# Natural use with lists
-pipelines = [pipeline, pipeline2]
-for p in pipelines:
-    if p:  # Uses __bool__
-        p.run()
-print(pipeline.get_log())  # 3 times run
-print()
-
-# ----------------------------------
-# eq and hash: Equality and Identity
-print("\neq and hash:")
-
-p1 = LFPPipeline(sampling_rate=1000)
-p2 = LFPPipeline(sampling_rate=1000)
-p1.load_data("week11_simulated_lfp.npy")
-p2.load_data("week11_simulated_lfp.npy")
-
-print(p1 == p2)  # True — same modality, fs, and sample count
-print(p1 is p2)  # False — different objects in memory
-
-# Can use as dict keys
-results = {p1: "processed", p2: "cached"}
-print(len(results))  # 1 — they hash equally, so same key
-print(results)
-print()
-
-# -------------------------------------------
-# iter and getitem: Making Pipelines Iterable
-print("\niter and getitem:")
-
-
 class MultiChannelPipeline:
     """A container that runs one LFPPipeline per channel."""
 
@@ -181,56 +114,122 @@ class MultiChannelPipeline:
         return self
 
 
-mc = MultiChannelPipeline(n_channels=4, sampling_rate=1000)
+if __name__ == "__main__":
+    print("\nrepr and str:")
+    pipeline = LFPPipeline(sampling_rate=1000)
+    pipeline.load_data("week11_simulated_lfp.npy")
+    pipeline.run()
 
-# Iteration
-for channel_pipeline in mc:
-    print(channel_pipeline)
+    print("repr(pipeline)")
+    print(repr(pipeline))
+    # "LFPPipeline(modality='LFP', fs=1000, duration=2.0s)"
+    print("print(pipeline)")
+    print(pipeline)
+    # [LFPPipeline] modality=LFP, fs=1000 Hz, 2000 samples (2.00s), status=processed
+    print("str(pipeline)")
+    print(str(pipeline))
+    # "[LFPPipeline] modality=LFP, ..."
 
-# Indexing
-first_channel = mc[0]
-last_channel = mc[-1]
+    # --------------------------------------
+    # len and bool: Sizing and Truth Testing
+    print("\nlen and bool:")
+    pipeline2 = LFPPipeline()
+    bool(pipeline2)  # False — no data yet
+    print(len(pipeline2))  # 0
+    # Natural use in conditionals
+    if pipeline2:
+        pipeline2.run()
+    else:
+        print("Load data before running.")
 
-# List comprehension
-all_durations = [p.duration for p in mc if p]
-print(all_durations)
+    bool(pipeline)  # True — data loaded
+    print(len(pipeline))  # 2000
+    # Natural use in conditionals
+    if pipeline:
+        pipeline.run()
+    else:
+        print("Load data before running.")
+    print()
 
-# Built-in functions
-print(len(mc))  # 4
-print(list(mc))  # [LFPPipeline(...), LFPPipeline(...), ...]
-print()
+    # Natural use with lists
+    pipelines = [pipeline, pipeline2]
+    for p in pipelines:
+        if p:  # Uses __bool__
+            p.run()
+    print(pipeline.get_log())  # 3 times run
+    print()
 
-# --------------------------------------
-# add and contains: Operator Overloading
-print("\nadd and contains:")
-p10 = LFPPipeline(sampling_rate=1000, lowcut=1.0, highcut=100.0)
-p20 = LFPPipeline(sampling_rate=1000, lowcut=1.0, highcut=100.0)
+    # ----------------------------------
+    # eq and hash: Equality and Identity
+    print("\neq and hash:")
 
-p10.load_data("week11_simulated_lfp.npy")
-p20.load_data("week11_simulated_lfp.npy")
+    p1 = LFPPipeline(sampling_rate=1000)
+    p2 = LFPPipeline(sampling_rate=1000)
+    p1.load_data("week11_simulated_lfp.npy")
+    p2.load_data("week11_simulated_lfp.npy")
 
-# Concatenation using +
-combined = p10 + p20
-print(len(combined))  # 4000 samples (2 + 2 seconds)
+    print(p1 == p2)  # True — same modality, fs, and sample count
+    print(p1 is p2)  # False — different objects in memory
 
-# Membership using in
-print(10.0 in p10)  # True  — 10 Hz is within 1–100 Hz
-print(200.0 in p10)  # False — 200 Hz exceeds highcut
-print(0.5 in p10)  # False — 0.5 Hz below lowcut
+    # Can use as dict keys
+    results = {p1: "processed", p2: "cached"}
+    print(len(results))  # 1 — they hash equally, so same key
+    print(results)
+    print()
 
-# Use in analysis: filter out events outside the passband
-event_frequencies = [4.0, 10.0, 80.0, 120.0, 200.0]
-in_band = [f for f in event_frequencies if f in p10]
-print(in_band)  # [4.0, 10.0, 80.0]
-print()
+    # -------------------------------------------
+    # iter and getitem: Making Pipelines Iterable
+    print("\niter and getitem:")
+    mc = MultiChannelPipeline(n_channels=4, sampling_rate=1000)
 
-# ----------------------------------------
-# enter and exit: Context Manager Protocol
-print("\nenter and exit (Context Manager Protocol):")
+    # Iteration
+    for channel_pipeline in mc:
+        print(channel_pipeline)
 
-with LFPPipeline(sampling_rate=1000) as pipeline_ctx:
-    pipeline_ctx.load_data("week11_simulated_lfp.npy")
-    pipeline_ctx.run()
-    print(pipeline_ctx.get_log())
-# __exit__ is guaranteed to run here, even if an exception occurred inside the block
-print()
+    # Indexing
+    first_channel = mc[0]
+    last_channel = mc[-1]
+
+    # List comprehension
+    all_durations = [p.duration for p in mc if p]
+    print(all_durations)
+
+    # Built-in functions
+    print(len(mc))  # 4
+    print(list(mc))  # [LFPPipeline(...), LFPPipeline(...), ...]
+    print()
+
+    # --------------------------------------
+    # add and contains: Operator Overloading
+    print("\nadd and contains:")
+    p10 = LFPPipeline(sampling_rate=1000, lowcut=1.0, highcut=100.0)
+    p20 = LFPPipeline(sampling_rate=1000, lowcut=1.0, highcut=100.0)
+
+    p10.load_data("week11_simulated_lfp.npy")
+    p20.load_data("week11_simulated_lfp.npy")
+
+    # Concatenation using +
+    combined = p10 + p20
+    print(len(combined))  # 4000 samples (2 + 2 seconds)
+
+    # Membership using in
+    print(10.0 in p10)  # True  — 10 Hz is within 1–100 Hz
+    print(200.0 in p10)  # False — 200 Hz exceeds highcut
+    print(0.5 in p10)  # False — 0.5 Hz below lowcut
+
+    # Use in analysis: filter out events outside the passband
+    event_frequencies = [4.0, 10.0, 80.0, 120.0, 200.0]
+    in_band = [f for f in event_frequencies if f in p10]
+    print(in_band)  # [4.0, 10.0, 80.0]
+    print()
+
+    # ----------------------------------------
+    # enter and exit: Context Manager Protocol
+    print("\nenter and exit (Context Manager Protocol):")
+
+    with LFPPipeline(sampling_rate=1000) as pipeline_ctx:
+        pipeline_ctx.load_data("week11_simulated_lfp.npy")
+        pipeline_ctx.run()
+        print(pipeline_ctx.get_log())
+    # __exit__ is guaranteed to run here, even if an exception occurred inside the block
+    print()

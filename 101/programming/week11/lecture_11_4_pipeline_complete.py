@@ -14,6 +14,11 @@ class NeuralPipeline(ABC):
         self.data = None
         self.processed_data = None
         self._processing_log = []
+        self.__version = "1.0"  # Private: mangled to _NeuralPipeline__version
+
+    def get_version(self):
+        """Returns version."""
+        return self.__version  # Access via public method
 
     @property
     def nyquist(self):
