@@ -120,3 +120,39 @@ class NeuralPipeline(ABC):
             f"{data_info}, "
             f"status={status}"
         )
+
+    def __len__(self):
+        """Return the number of samples in the loaded recording."""
+        return self.n_samples  # Already defined as a @property
+
+    def __bool__(self):
+        """A pipeline is truthy if it has data loaded."""
+        return self.data is not None
+
+    def __eq__(self, other):
+        """Two pipelines are equal if they have the same configuration and data shape."""
+        if not isinstance(other, NeuralPipeline):
+            return NotImplemented
+        return (
+            self.modality == other.modality
+            and self.sampling_rate == other.sampling_rate
+            and self.n_samples == other.n_samples
+        )
+
+    def __hash__(self):
+        """Required when __eq__ is defined, to keep objects usable as dict keys."""
+        return hash((self.modality, self.sampling_rate, self.n_samples))
+
+    def __enter__(self):
+        """Enable use as a context manager."""
+        self._log("Pipeline context entered.")
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Clean up on context exit; log any exception."""
+        if exc_type is not None:
+            self._log(f"Pipeline exited with exception: {exc_type.__name__}: {exc_val}")
+        else:
+            self._log("Pipeline context exited cleanly.")
+        # Return False to propagate exceptions (don't suppress them)
+        return False
