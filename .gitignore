@@ -135,6 +135,7 @@ dmypy.json
 *.png
 data
 ortho_example__.py
+101/programming/figure*.png
 101/programming/week06/session_001.txt
 101/programming/week06/spike_output.txt
 101/programming/week06/experiment_data.json
