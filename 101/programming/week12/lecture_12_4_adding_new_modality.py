@@ -15,7 +15,7 @@ for p in sys.path:
     print(p)
 
 """
-Launch from the project root as: python -m week12.lecture_12_4_adding_new_modality
+Launch from the project root folder as: python -m week12.lecture_12_4_adding_new_modality
 """
 
 # Standalone test
