@@ -77,4 +77,4 @@ plt.savefig("figure_13-4-2_complete_pipeline.png", dpi=150, bbox_inches="tight")
 print()
 
 print(f"\nMean firing rate: {firing_rates.mean():.1f} Hz")
-print(f"Spike trains saved to brian2_spike_trains.npy")
+print(f"Spike trains saved to {filename}")
