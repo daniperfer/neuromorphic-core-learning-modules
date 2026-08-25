@@ -81,6 +81,7 @@ brian2_data = np.load(f"{filename}", allow_pickle=True).item()
 # We'll analyze neuron with len(spike_times) > 1 as a single unit example first
 first_idx = 0
 second_idx = 0
+third_idx = 0
 
 for idx in range(N):
     if len(brian2_data[idx]) > 1:
@@ -92,6 +93,12 @@ for idx in range(first_idx + 1, N):
     if len(brian2_data[idx]) > 1:
         spike_times_1 = brian2_data[idx]
         second_idx = idx
+        break
+
+for idx in range(N - 1, second_idx, -1):
+    if len(brian2_data[idx]) > 1:
+        spike_times_2 = brian2_data[idx]
+        third_idx = idx
         break
 
 duration_s = duration / second
@@ -167,7 +174,7 @@ print()
 
 fig, axes = plt.subplots(1, 3, figsize=(15, 4))
 
-neuron_samples = [5, 15, 30]
+neuron_samples = [first_idx, second_idx, third_idx]
 colors = ["steelblue", "darkorange", "green"]
 
 for ax, idx, color in zip(axes, neuron_samples, colors):
@@ -177,11 +184,11 @@ for ax, idx, color in zip(axes, neuron_samples, colors):
         continue
 
     isis = np.diff(spikes) * 1000  # Convert to ms
-    stats = isi_statistics(spikes)
+    stats = isi_statistics(spikes, (duration / second))
 
     ax.hist(isis, bins=30, color=color, alpha=0.7, edgecolor="white", density=True)
     ax.axvline(
-        stats["mean_isi"] * 1000,
+        stats["mean_isi_ms"],
         color="black",
         linestyle="--",
         lw=1.5,
@@ -189,7 +196,9 @@ for ax, idx, color in zip(axes, neuron_samples, colors):
     )
     ax.set_xlabel("ISI (ms)")
     ax.set_ylabel("Density")
-    ax.set_title(f"Neuron {idx}\n" f"Rate = {len(spikes)/5:.1f} Hz | CV = {stats['cv']:.2f}")
+    ax.set_title(
+        f"Neuron {idx}\n" f"Rate = {len(spikes)/duration_s:.1f} Hz | CV = {stats['cv']:.2f}"
+    )
     ax.legend(fontsize=8)
 
 plt.suptitle("ISI Distributions — Brian2 LIF Simulation", y=1.02, fontsize=12)
@@ -203,7 +212,7 @@ print("ISI distribution example completed...")
 # Compare two pairs: one with known shared drive, one drawn randomly
 spikes_a = brian2_data[first_idx]
 spikes_b = brian2_data[second_idx]  # same input distribution range, independent
-spikes_c = brian2_data[25]  # another independent neuron
+spikes_c = brian2_data[third_idx]  # another independent neuron
 
 lags_ab, cc_ab = cross_correlogram(spikes_a, spikes_b, max_lag_ms=100, bin_width_ms=2)
 lags_ac, cc_ac = cross_correlogram(spikes_a, spikes_c, max_lag_ms=100, bin_width_ms=2)
