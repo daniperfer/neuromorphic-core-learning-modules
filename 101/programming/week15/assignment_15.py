@@ -134,9 +134,9 @@ def run_simulation(params: SimulationParams) -> dict:
 # --- 5. NAMED CONDITIONS (for your comparison figure) ---
 # Replace these with your actual conditions
 conditions = [
-    SimuParams(w_IE=0.3, label="low_inhibition"),
-    SimuParams(w_IE=0.5, label="medium_inhibition"),
-    SimuParams(w_IE=0.9, label="high_inhibition"),
+    SimParams(w_IE=0.3, label="low_inhibition"),
+    SimParams(w_IE=0.5, label="medium_inhibition"),
+    SimParams(w_IE=0.9, label="high_inhibition"),
 ]
 
 condition_results = {}
