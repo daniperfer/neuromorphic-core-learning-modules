@@ -9,7 +9,7 @@ Lecture 5.1: From Biology to Silicon — The Design Translation Problem
 Biological neural systems have a set of properties:
 1. they process information asynchronously
 2. they are massively parallel
-3. they consume remarkably little powe
+3. they consume remarkably little power
 4. they learn continuously
 
 Engineering a chip to reproduce all of these properties simultaneously
