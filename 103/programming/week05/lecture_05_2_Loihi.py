@@ -8,6 +8,8 @@ Lecture 5.2: Intel Loihi — Architecture and On-Chip Learning
 """
 A neurocore as a small, specialized processor that does exactly one thing:
 simulate LIF neurons and route spikes.
+Loihi 1 contains 128 neuromorphic cores per chip.
+Each core simulates approximately 1,024 LIF neurons, giving roughly 128,000 neurons per chip.
 Each neurocore (Loihi 1) also holds a local synaptic memory of up to 131,072 synapses,
 which stores the incoming connection weights for the neurons on that core.
 
