@@ -15,7 +15,7 @@ This is not a bug or a sign that most of your brain is idle.
 This property is called sparsity, essential to understanding
 why event-based processing is efficient.
 
-n mathematics, a vector or signal is sparse if most of its
+In mathematics, a vector or signal is sparse if most of its
 components are zero (or near zero) and only a small fraction are non-zero.
 
 For the brain, the difference between dense and sparse representations is
