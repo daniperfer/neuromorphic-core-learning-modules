@@ -53,7 +53,7 @@ are the most flexible but least efficient. Akida’s hybrid mode.
 # Decision Framework: Which Platform for Which Problem?
 
 """
-Comparison does not hace a winner. The “best” neuromorphic platform is always relative
+Comparison does not make a winner. The “best” neuromorphic platform is always relative
 to a specific application:
 
 Neuroscience research --> SpiNNaker.
